@@ -1,0 +1,24 @@
+{
+  "name": "cms-project-app",
+  "version": "1.0.0",
+  "description": "thi is a cms project in mern tack development",
+  "keywords": [
+    "node",
+    "express",
+    "mongodb"
+  ],
+  "license": "ISC",
+  "author": "Shaban Rasheed",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mongoose": "^9.2.1"
+  }
+}
