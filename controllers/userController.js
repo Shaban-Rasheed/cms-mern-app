@@ -1,14 +1,15 @@
 import { User } from "../models/User.js";
 
 export const addUser = async (req, res) => {
+  const { fname, lname, pwd, mail, mob, addr } = req.body;
   try {
     const user = new User({
-      firstName: "Kashif",
-      lastName: "Usman",
-      email: "usman@gmail.com",
-      password: "5544sdfsd",
-      mobile: "123456789",
-      address: "Lahore",
+      firstName: fname,
+      lastName: lname,
+      email: mail,
+      password: pwd,
+      mobile: mob,
+      address: addr,
     });
     await user.save();
     res.send("Record has been addes");
@@ -23,4 +24,7 @@ export const homePage = (req, res) => {
 export const getAllUsers = async (req, res) => {
   const allUsers = await User.find();
   res.json(allUsers);
+};
+export const registerUser = (req, res) => {
+  res.render("register");
 };
