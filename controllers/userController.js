@@ -12,7 +12,8 @@ export const addUser = async (req, res) => {
       address: addr,
     });
     await user.save();
-    res.send("Record has been addes");
+    // res.send("Record has been addes");
+    res.redirect("/");
   } catch (error) {
     console.log(error.message);
     res.send(error.message);
