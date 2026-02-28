@@ -13,11 +13,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-app.use(userRouter);
 
 connectDB();
 app.use(express.static(path.join(__dirname, "public")));
-
+app.use(express.urlencoded({ extended: true }));
+app.use(userRouter);
+app.set("view engine", "ejs");
 app.listen(port, () => {
   console.log(`Server started at http://localhost:${port}`);
 });
