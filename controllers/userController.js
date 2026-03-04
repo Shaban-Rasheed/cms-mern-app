@@ -19,9 +19,7 @@ export const addUser = async (req, res) => {
     res.send(error.message);
   }
 };
-export const homePage = (req, res) => {
-  res.send("Home Page");
-};
+
 export const getAllUsers = async (req, res) => {
   const allUsers = await User.find();
   res.json(allUsers);
