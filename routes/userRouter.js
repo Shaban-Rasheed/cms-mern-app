@@ -7,6 +7,6 @@ import {
 
 export const userRouter = express.Router();
 
-userRouter.post("/addusers", addUser);
+userRouter.post("/addUser", addUser);
 userRouter.get("/getallusers", getAllUsers);
 userRouter.get("/register", registerUser);
