@@ -13,7 +13,7 @@ export const addUser = async (req, res) => {
     });
     await user.save();
     // res.send("Record has been addes");
-    res.redirect("/");
+    res.redirect("/login");
   } catch (error) {
     console.log(error.message);
     res.send(error.message);
@@ -26,4 +26,23 @@ export const getAllUsers = async (req, res) => {
 };
 export const registerUser = (req, res) => {
   res.render("register");
+};
+
+export const loginUser = async (req, res) => {
+  const { mail, pwd } = req.body;
+
+  try {
+    const user = await User.findOne({
+      email: mail,
+    });
+
+    if (user && user.password == pwd) {
+      res.redirect("/dashboard");
+    } else {
+      res.send("<h1>Invalid Email or Password</h1>");
+    }
+  } catch (error) {
+    console.log(error.message);
+    res.send(error.message);
+  }
 };
