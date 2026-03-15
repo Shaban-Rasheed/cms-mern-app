@@ -7,6 +7,7 @@ import { connectDB } from "./config/db.js";
 import { userRouter } from "./routes/userRouter.js";
 import { pageRouter } from "./routes/pageRouter.js";
 import { adminRouter } from "./routes/adminRoutes.js";
+import { postRouter } from "./routes/postRouter.js";
 
 dotenv.config();
 const port = process.env.PORT || 3000;
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(userRouter);
 app.use(pageRouter);
 app.use(adminRouter);
+app.use(postRouter);
 app.set("view engine", "ejs");
 app.listen(port, () => {
   console.log(`Server started at http://localhost:${port}`);
