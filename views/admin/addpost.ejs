@@ -19,6 +19,10 @@
       src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
       crossorigin="anonymous"
     ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css"
+      rel="stylesheet"
+    />
   </head>
   <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -115,7 +119,7 @@
             <hr />
             <div class="row mt-5">
               <div class="col-md-12">
-                <form method="post" action="/addpost">
+                <form method="post" action="/addpost" id="postForm">
                   <div class="row mb-3">
                     <label for="inputEmail3" class="col-sm-2 col-form-label"
                       >Title</label
@@ -134,15 +138,12 @@
                     <label for="inputPassword3" class="col-sm-2 col-form-label"
                       >Description</label
                     >
+                    <input type="hidden" name="pbody" id="content" />
                     <div class="col-sm-10">
-                      <textarea
-                        class="form-control"
-                        required
-                        name="pbody"
-                      ></textarea>
+                      <div id="editor" style="height: 300px"></div>
                     </div>
                   </div>
-                  <p class="text-end">
+                  <p class="text-end mt-3">
                     <button type="submit" class="btn btn-primary">
                       Add Post
                     </button>
@@ -184,5 +185,45 @@
       crossorigin="anonymous"
     ></script>
     <script src="admin/js/datatables-simple-demo.js"></script>
+    <!-- Include the Quill library -->
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <!-- Initialize Quill editor -->
+    <script>
+      const toolbarOptions = [
+        ["bold", "italic", "underline", "strike"], // toggled buttons
+        ["blockquote", "code-block"],
+        ["link", "image", "video", "formula"],
+
+        [{ header: 1 }, { header: 2 }], // custom button values
+        [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+        [{ script: "sub" }, { script: "super" }], // superscript/subscript
+        [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+        [{ direction: "rtl" }], // text direction
+
+        [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+        [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+        [{ font: [] }],
+        [{ align: [] }],
+
+        ["clean"], // remove formatting button
+      ];
+
+      const quill = new Quill("#editor", {
+        modules: {
+          toolbar: toolbarOptions,
+        },
+        theme: "snow",
+      });
+    </script>
+    <!-- get id and inpout data using dom manipolation -->
+    <script>
+      const postForm = document.getElementById("postForm");
+      postForm.onsubmit = () => {
+        const pdata = document.getElementById("content");
+        pdata.value = quill.root.innerHTML;
+      };
+    </script>
   </body>
 </html>
