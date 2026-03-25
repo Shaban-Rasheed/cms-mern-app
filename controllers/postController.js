@@ -4,6 +4,11 @@ export const allPosts = async (req, res) => {
   const posts = await Post.find();
   res.json(posts);
 };
+export const getOnePost = async (req, res) => {
+  const pid = await req.params.postID;
+  const getId = await Post.findOne({ _id: pid });
+  res.render("post", { postData: getId });
+};
 export const addPost = async (req, res) => {
   res.render("admin/addpost");
 };
