@@ -8,6 +8,7 @@ import { userRouter } from "./routes/userRouter.js";
 import { pageRouter } from "./routes/pageRouter.js";
 import { adminRouter } from "./routes/adminRoutes.js";
 import { postRouter } from "./routes/postRouter.js";
+import session from "express-session";
 
 dotenv.config();
 const port = process.env.PORT || 3000;
@@ -20,6 +21,16 @@ const app = express();
 connectDB();
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: "hpzbook",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60,
+    },
+  }),
+);
 app.use(userRouter);
 app.use(pageRouter);
 app.use(adminRouter);
